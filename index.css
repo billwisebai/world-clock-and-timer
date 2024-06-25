@@ -1,0 +1,303 @@
+body {
+  max-width: 60rem;
+}
+.clock_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+}
+.clock {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 4px solid black;
+  position: relative;
+  background-color: white;
+}
+.city {
+  margin: 16px 0 0;
+}
+.date {
+  margin: 4px 0 0;
+}
+.hour {
+  height: 35px;
+  width: 3px;
+  background-color: black;
+  position: absolute;
+  bottom: 50%;
+  left: 49%;
+  transform-origin: bottom;
+  z-index: 1;
+}
+.minute {
+  height: 55px;
+  width: 3px;
+  background-color: black;
+  position: absolute;
+  bottom: 50%;
+  left: 49%;
+  transform-origin: bottom;
+  z-index: 1;
+}
+.second {
+  height: 60px;
+  width: 1px;
+  background-color: black;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  z-index: 1;
+}
+.tail {
+  height: 10px;
+}
+.center_ring {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  z-index: 1;
+}
+.scale {
+  height: 146px;
+  width: 3px;
+  background-color: lightgray;
+  position: absolute;
+  top: 2px;
+  left: 49.5%;
+}
+.scale_cover {
+  height: 122px;
+  width: 122px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+.rotate_30 {
+  rotate: 30deg;
+}
+.rotate_60 {
+  rotate: 60deg;
+}
+.rotate_90 {
+  rotate: 90deg;
+}
+.rotate_120 {
+  rotate: 120deg;
+}
+.rotate_150 {
+  rotate: 150deg;
+}
+.day_color {
+  background-color: white;
+  border-color: black;
+}
+.night_color {
+  background-color: black;
+  border-color: white;
+}
+.clock_night_border_color {
+  border-color: gray;
+}
+.hide {
+  display: none;
+}
+.button {
+  border-radius: 2rem;
+  width: 10rem;
+  height: 3.5rem;
+  border: 0px;
+}
+.timer_text {
+  font-family: sans-serif;
+  color: white;
+  margin: 4px;
+}
+.timer_sector {
+  height: 7rem;
+  background-color: #e94467;
+}
+.timer_buttons {
+  display: flex;
+}
+.timer_instruction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.timer_circle_cover {
+  position: absolute;
+  left: 50.4%;
+  width: 13.4rem;
+  height: 13.5rem;
+  border-radius: 50%;
+  background-color: #413c69;
+  border-color: #413c69;
+  z-index: 2;
+}
+.timer_p {
+  font-size: larger;
+  color: lightgray;
+}
+#world_clocks {
+  width: fit-content;
+  margin: auto;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  row-gap: 2rem;
+  column-gap: 8rem;
+  background-image: linear-gradient(
+    to right,
+    rgb(250, 250, 243),
+    rgb(205, 238, 250)
+  );
+}
+#melbourne_section {
+  grid-column: 1 / 4;
+}
+#timer {
+  display: none;
+  margin: auto;
+  padding: 16px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 36rem;
+  width: 18rem;
+  background-color: #413c69;
+  border-radius: 2rem;
+}
+#switch_button {
+  position: absolute;
+  top: 5rem;
+  right: 10rem;
+  width: 5rem;
+  height: 2rem;
+  background-color: #e94467;
+  color: white;
+}
+#input_timer {
+  display: none;
+  position: absolute;
+  top: 15rem;
+  right: 3rem;
+}
+#timer_button_start {
+  font-size: 1.3rem;
+  background-color: #e94467;
+}
+#timer_button_cancel {
+  display: none;
+  width: 7rem;
+  font-size: 1.3rem;
+  background-color: gray;
+}
+#timer_circle {
+  position: relative;
+  display: inline-block;
+  width: 14rem;
+  height: 14rem;
+}
+#countdown {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-size: 2.6rem;
+  font-weight: 400;
+  z-index: 3;
+}
+/* .sector {
+  display: inline-block;
+  width: 14rem;
+  height: 14rem;
+  position: relative;
+  background-color: #e94467;
+  border-radius: 50%;
+  overflow: hidden;
+  &::before {
+    display: inline-block;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #413c69;
+    clip-path: polygon(50% 50%, 50% 0%, 50% 0%);
+  }
+}
+.animation {
+  &::before {
+    animation: rotating 3600s linear both;
+  }
+}
+@keyframes rotating {
+  0% {
+    clip-path: polygon(50% 50%, 50% 0%);
+  }
+  0.0000001% {
+    clip-path: polygon(50% 50%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%);
+  }
+  12.5000001% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
+  }
+  37.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%);
+  }
+  37.500001% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+  }
+  62.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  62.5000001% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%);
+  }
+  87.5% {
+    clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+  }
+  87.500001% {
+    clip-path: polygon(
+      50% 50%,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      0% 0%,
+      0% 0%
+    );
+  }
+  100% {
+    clip-path: polygon(
+      50% 50%,
+      50% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      0% 0%,
+      50% 0%
+    );
+  }
+} */

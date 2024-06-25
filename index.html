@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>World Clock</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <button
+      type="button"
+      id="switch_button"
+      class="button"
+      onclick="switchPage()"
+    >
+      Switch
+    </button>
+    <form id="input_timer" onsubmit="submitTimer(event)">
+      <input
+        type="text"
+        name="timer"
+        size="25"
+        placeholder="input timer like HH:MM:SS"
+      />
+      <br />
+      <label>* No More than 10 hours</label>
+    </form>
+    <main id="world_clocks">
+      <section id="melbourne_section" class="clock_section">
+        <div id="melbourne" class="clock">
+          <div class="hour"></div>
+          <div class="hour tail"></div>
+          <div class="minute"></div>
+          <div class="minute tail"></div>
+          <div class="second"></div>
+          <div class="second tail"></div>
+          <div class="center_ring"></div>
+          <div class="scale"></div>
+          <div class="scale rotate_30"></div>
+          <div class="scale rotate_60"></div>
+          <div class="scale rotate_90"></div>
+          <div class="scale rotate_120"></div>
+          <div class="scale rotate_150"></div>
+          <div class="scale_cover"></div>
+        </div>
+        <h4 class="city"></h4>
+        <h5 class="date"></h5>
+      </section>
+    </main>
+    <main id="timer">
+      <h2 class="timer_text">Timer</h2>
+      <section class="timer_instruction">
+        <h4 class="timer_text">1 hour to launch...</h4>
+        <p class="timer_text timer_p">Click to start countdown</p>
+      </section>
+      <section>
+        <div id="timer_circle">
+          <p id="countdown" class="timer_text">01:00:00</p>
+          <div class="center_ring timer_circle_cover"></div>
+          <div id="timer_sector_0" class="second timer_sector"></div>
+        </div>
+      </section>
+      <section class="timer_buttons">
+        <button
+          type="button"
+          id="timer_button_cancel"
+          class="button timer_text"
+          onclick="resetTimer()"
+        >
+          CANCEL
+        </button>
+        <button
+          type="button"
+          id="timer_button_start"
+          class="button timer_text"
+          onclick="startTimer()"
+        >
+          START
+        </button>
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
