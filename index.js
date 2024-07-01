@@ -29,6 +29,7 @@ let nextSectorId = 0;
 let timerDisplay = "01:00:00";
 let timerSecond = 3600;
 let totalHideNumber = 10;
+let modalShow = false;
 
 cityIds.forEach((id, index) => {
   if (index > 0) {
@@ -63,6 +64,14 @@ function worldClock() {
   cityIds.forEach((id) => {
     setClock(id);
   });
+}
+
+function handleSwitch() {
+  if (page == 2 && counting) {
+    toggleModal();
+  } else {
+    switchPage();
+  }
 }
 
 function switchPage() {
@@ -124,6 +133,22 @@ function resetTimer() {
   countdownEl.innerHTML = timerDisplay;
   nextSectorId = 0;
   showSectors();
+}
+
+function stopTimerAndSwitch() {
+  startTimer();
+  continueSwitch();
+}
+
+function continueSwitch() {
+  toggleModal();
+  switchPage();
+}
+
+function toggleModal() {
+  modalShow = !modalShow;
+  const modelEl = document.getElementById("modal");
+  modelEl.style.display = modalShow ? "flex" : "none";
 }
 
 function getTime(id) {

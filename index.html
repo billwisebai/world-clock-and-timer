@@ -10,7 +10,7 @@
       type="button"
       id="switch_button"
       class="button"
-      onclick="switchPage()"
+      onclick="handleSwitch()"
     >
       Switch
     </button>
@@ -46,7 +46,7 @@
         <h5 class="date"></h5>
       </section>
     </main>
-    <main id="timer">
+    <main id="timer" class="frame">
       <h2 class="timer_text">Timer</h2>
       <section class="timer_instruction">
         <h4 class="timer_text">1 hour to launch...</h4>
@@ -78,6 +78,25 @@
         </button>
       </section>
     </main>
+    <section id="modal">
+      <div class="frame modal_body">
+        <h3 class="timer_text">Would you like to stop the timer?</h3>
+        <div class="modal_button_section">
+          <button
+            class="button timer_text modal_button modal_button_cancel"
+            onclick="continueSwitch()"
+          >
+            No
+          </button>
+          <button
+            class="button timer_text modal_button"
+            onclick="stopTimerAndSwitch()"
+          >
+            Yes
+          </button>
+        </div>
+      </div>
+    </section>
     <script src="index.js"></script>
   </body>
 </html>
