@@ -26,7 +26,7 @@ let page = 1;
 let counting = false;
 let sectors = 36000;
 let nextSectorId = 0;
-let timer = "01:00:00";
+let timerDisplay = "01:00:00";
 let timerSecond = 3600;
 let totalHideNumber = 10;
 
@@ -48,10 +48,43 @@ for (let i = 1; i < sectors; i++) {
   document.getElementById("timer_circle").appendChild(clone);
 }
 
-const test = setInterval(() => {
+let worldClockInterval = setInterval(worldClock, 1000);
+let timerInterval;
+
+function startWorldClock() {
+  worldClockInterval = setInterval(worldClock, 1000);
+}
+
+function stopWorldClock() {
+  clearInterval(worldClockInterval);
+}
+
+function worldClock() {
   cityIds.forEach((id) => {
     setClock(id);
   });
+}
+
+function switchPage() {
+  const worldClockEl = document.getElementById("world_clocks");
+  const timerEl = document.getElementById("timer");
+  const switchButtonEl = document.getElementById("switch_button");
+  worldClockEl.style.display = page == 1 ? "none" : "grid";
+  timerEl.style.display = page == 1 ? "flex" : "none";
+  switchButtonEl.style.backgroundColor =
+    page == 1 ? "rgb(205, 238, 250)" : "#e94467";
+  switchButtonEl.style.color = page == 1 ? "black" : "white";
+  switchButtonEl.style.border =
+    page == 1 ? "1px solid #413c69" : "rgb(205, 238, 250)";
+  page = page == 1 ? 2 : 1;
+  if (page == 2) {
+    stopWorldClock();
+  } else {
+    startWorldClock();
+  }
+}
+
+function timer() {
   const countdownEl = document.getElementById("countdown");
   if (counting) {
     if (countdownEl.innerText == "00:00:00") {
@@ -62,7 +95,36 @@ const test = setInterval(() => {
       nextSectorId += totalHideNumber;
     }
   }
-}, 1000);
+}
+function startTimer() {
+  const timerButtonStartEl = document.getElementById("timer_button_start");
+  const timerButtonCancelEl = document.getElementById("timer_button_cancel");
+  counting = !counting;
+  if (counting) {
+    timerInterval = setInterval(timer, 1000);
+  } else {
+    clearInterval(timerInterval);
+  }
+  timerButtonStartEl.innerHTML = counting ? "PAUSE" : "START";
+  timerButtonStartEl.style.backgroundColor = counting ? "#a64359" : "#e94467";
+  timerButtonStartEl.style.width = "7rem";
+  timerButtonCancelEl.style.display = "block";
+}
+
+function resetTimer() {
+  const timerButtonStartEl = document.getElementById("timer_button_start");
+  const timerButtonCancelEl = document.getElementById("timer_button_cancel");
+  const countdownEl = document.getElementById("countdown");
+  counting = false;
+  clearInterval(timerInterval);
+  timerButtonStartEl.innerHTML = "START";
+  timerButtonStartEl.style.backgroundColor = "#e94467";
+  timerButtonStartEl.style.width = "10rem";
+  timerButtonCancelEl.style.display = "none";
+  countdownEl.innerHTML = timerDisplay;
+  nextSectorId = 0;
+  showSectors();
+}
 
 function getTime(id) {
   const date = adjustDate(cityIds[0], id);
@@ -132,44 +194,6 @@ function setClockColor(clockEl, hours) {
   });
 }
 
-function switchPage() {
-  const worldClockEl = document.getElementById("world_clocks");
-  const timerEl = document.getElementById("timer");
-  const switchButtonEl = document.getElementById("switch_button");
-  worldClockEl.style.display = page == 1 ? "none" : "grid";
-  timerEl.style.display = page == 1 ? "flex" : "none";
-  switchButtonEl.style.backgroundColor =
-    page == 1 ? "rgb(205, 238, 250)" : "#e94467";
-  switchButtonEl.style.color = page == 1 ? "black" : "white";
-  switchButtonEl.style.border =
-    page == 1 ? "1px solid #413c69" : "rgb(205, 238, 250)";
-  page = page == 1 ? 2 : 1;
-}
-
-function startTimer() {
-  const timerButtonStartEl = document.getElementById("timer_button_start");
-  const timerButtonCancelEl = document.getElementById("timer_button_cancel");
-  counting = !counting;
-  timerButtonStartEl.innerHTML = counting ? "PAUSE" : "START";
-  timerButtonStartEl.style.backgroundColor = counting ? "#a64359" : "#e94467";
-  timerButtonStartEl.style.width = "7rem";
-  timerButtonCancelEl.style.display = "block";
-}
-
-function resetTimer() {
-  const timerButtonStartEl = document.getElementById("timer_button_start");
-  const timerButtonCancelEl = document.getElementById("timer_button_cancel");
-  const countdownEl = document.getElementById("countdown");
-  counting = false;
-  timerButtonStartEl.innerHTML = "START";
-  timerButtonStartEl.style.backgroundColor = "#e94467";
-  timerButtonStartEl.style.width = "10rem";
-  timerButtonCancelEl.style.display = "none";
-  countdownEl.innerHTML = timer;
-  nextSectorId = 0;
-  showSectors();
-}
-
 function showSectors() {
   for (let i = 0; i < sectors; i++) {
     let sectorEl = document.getElementById("timer_sector_" + i);
@@ -224,7 +248,7 @@ function submitTimer(event) {
       timerList.every((number) => number >= 0 && number < 60) &&
       timerList[0] < 10)
   ) {
-    timer = newTimer;
+    timerDisplay = newTimer;
     let countdownEl = document.getElementById("countdown");
     countdownEl.innerHTML = newTimer;
     timerSecond = timerList[0] * 3600 + timerList[1] * 60 + timerList[2];
